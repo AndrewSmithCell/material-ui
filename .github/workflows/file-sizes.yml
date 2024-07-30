@@ -1,0 +1,31 @@
+name: Create file length
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: next
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Get file sizes
+      run: |
+        gci -rec -file|%{"$($_.Fullname) $($_.Length)"} >filelist.txt
+    - name: Archive filelist
+      shell: bash
+      run: |
+        "/c/Program Files/7-Zip/7z.exe" a -m0=lzma2 -mx t1.7z "filelist.txt"
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          t1.7z
+        tag_name: ${{ github.event.inputs.tags }}
