@@ -26,7 +26,7 @@ jobs:
     - name: Archive Release source
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -m0=lzma2 -mx t0.7z "." -xr!/*node_modules/* -xr!.github -xr!*.mp4 -xr!*.mov -xr!*.gif
+        "/c/Program Files/7-Zip/7z.exe" a -m0=lzma2 -mx t0.7z "." -xr!*node_modules/* -xr!.github -xr!*.mp4 -xr!*.mov -xr!*.gif
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
