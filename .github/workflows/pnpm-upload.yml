@@ -22,7 +22,7 @@ jobs:
         version: "9.5.0"
     - name: pnpm install
       run: |
-        del /s /q pnpm-lock.yaml
+        del pnpm-lock.yaml
         pnpm install
     - name: Archive Release packages
       shell: bash
