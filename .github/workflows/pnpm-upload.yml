@@ -24,18 +24,13 @@ jobs:
       run: |
         del pnpm-lock.yaml
         pnpm install
-    - name: Archive Release packages
+    - name: Archive Release source
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -m0=lzma2 -mx t1.7z "D:\.pnpm-store"
-    - name: Archive Release cache
-      shell: bash
-      run: |
-        "/c/Program Files/7-Zip/7z.exe" a -m0=lzma2 -mx t2.7z "C:\Users\runneradmin\AppData\Local\pnpm-cache"
+         "/c/Program Files/7-Zip/7z.exe" a -t7z -mx -m0=LZMA2 -v40m t0.7z "." -xr!node_modules -xr!.git
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          t1.7z
-          t2.7z
+          t0.7z
         tag_name: ${{ github.event.inputs.tags }}
