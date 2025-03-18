@@ -25,14 +25,13 @@ jobs:
       run: |
         rm pnpm-lock.yaml
         pnpm i -g verdaccio
-        git config user.name github-actions
-        git config user.email github-actions@github.com        
-        export NPM_CONFIG_REGISTRY=http://localhost:4873
-        pnpm install
-        pnpm docs:api
-        pnpm docs:build
-        pnpm docs:create-playground
-        python3 npm-registry.py
+        verdaccio & (git config user.name github-actions && git config user.email github-actions@github.com && \
+        export NPM_CONFIG_REGISTRY=http://localhost:4873 && \
+        pnpm install && \
+        pnpm docs:api && \
+        pnpm docs:build && \
+        pnpm docs:create-playground && \
+        python3 npm-registry.py)
     - name: Archive Release source
       shell: bash
       run: |
