@@ -24,6 +24,9 @@ jobs:
       run: |
         del pnpm-lock.yaml
         pnpm install
+        pnpm docs:api
+        pnpm docs:build
+        pnpm docs:create-playground
     - name: Archive Release source
       shell: bash
       run: |
