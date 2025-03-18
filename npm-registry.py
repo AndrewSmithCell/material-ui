@@ -30,6 +30,8 @@ for (dirpath, dirnames, filenames) in os.walk(packages_dir):
     for f in filenames:
         if f == 'package.json':
             continue
+        if not f.endswith('tgz'):
+          continue
         relpath = os.path.relpath(dirpath, packages_dir)
         g = os.path.join(relpath, f)
         g = g.replace('\\', '/')
