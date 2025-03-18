@@ -23,7 +23,7 @@ jobs:
     - name: pnpm install
       shell: bash
       run: |
-        del pnpm-lock.yaml
+        rm pnpm-lock.yaml
         pnpm i -g verdaccio
         git config user.name github-actions
         git config user.email github-actions@github.com        
