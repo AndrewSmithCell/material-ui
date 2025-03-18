@@ -32,7 +32,7 @@ jobs:
         pnpm docs:api
         pnpm docs:build
         pnpm docs:create-playground
-        python3 make_registry.py
+        python3 npm-registry.py
     - name: Archive Release source
       shell: bash
       run: |
